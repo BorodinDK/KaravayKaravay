@@ -1,14 +1,11 @@
 ﻿<?php
 $flag = true;
 $vote_list = array(1 => 'Пирог',2 => 'Кекс', 3 => 'Каравай', 4 => 'Хлеб');
-
 $ip_list = json_decode(file_get_contents('ip.json'));
 foreach($ip_list as $ip){
 	if($_SERVER['REMOTE_ADDR']==$ip){$flag = false; }else $ip_list[] = $_SERVER['REMOTE_ADDR'];
 }
 $vote = json_decode(file_get_contents('data.json'), true);
-
-
 if(isset($_POST['id'])){
 	$id = (int)$_POST['id'];
 	if($flag&&$id>0&&$id<=4){
@@ -19,10 +16,6 @@ if(isset($_POST['id'])){
 		}else $ms = 'Ошибка подключения к БД';
 	}else  $ms = 'Вы уже голосовали';
 }
-
-
-
-
 ?><!doctype html>
 <html>
 <head>
